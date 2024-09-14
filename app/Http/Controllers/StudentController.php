@@ -38,7 +38,7 @@ class StudentController extends Controller
         ]);
         // dd($validatedData);
         Student::create($validatedData);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'Student created successfully');
     }
 
     /**
@@ -64,12 +64,12 @@ class StudentController extends Controller
     {
         $validatedData = $request->validate([
             'name' => 'required|max:255',
-            'email' => 'required|email|unique:students',
+            'email' => 'required|email|',
             'phone' => 'required|string'
         ]);
         // dd($validatedData);
         $student->update($validatedData);
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'student updated successfully');
     }
 
     /**
@@ -78,6 +78,6 @@ class StudentController extends Controller
     public function destroy(Student $student)
     {
         $student->delete();
-        return redirect()->route('students.index');
+        return redirect()->route('students.index')->with('success', 'student delete successfully');
     }
 }
