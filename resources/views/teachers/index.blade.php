@@ -26,8 +26,8 @@
                     <td> {{ $teacher->email }} </td>
                     <td> {{ $teacher->phone }} </td>
                     <td>
-                        <a href="" class="btn btn-warning">Edit</a>
-                        <form action="" method="POST" style="display:inline-block;">
+                        <a href=" {{ route('teachers.edit', $teacher->id) }} " class="btn btn-warning">Edit</a>
+                        <form action=" {{ route('teachers.destroy', $teacher->id) }} " method="POST" style="display:inline-block;">
                             @csrf
                             @method('DELETE')
                             <button class="btn btn-danger" onclick="return confirm('Are you sure?')">Delete</button>

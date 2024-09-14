@@ -26,4 +26,25 @@ class TeacherController extends Controller
         Teacher::create($validatedData);
         return redirect()->route('teachers.index')->with('success', 'Teacher added successfully');
     }
+
+    public function edit(Teacher $teacher){
+        return view('teachers.edit', compact('teacher'));
+    }
+
+    public function update(Request $request, Teacher $teacher){
+        $validatedData = $request->validate([
+            'name' => 'required|max:254',
+            'email' => 'required|email|unique:teachers',
+            'phone' => 'required|string|min:6|max:20',
+        ]);
+
+        $teacher->update($validatedData);
+        return redirect()->route('teachers.index')->with('success', 'Teacher Updated successfully');
+    }
+
+    public function destroy(Teacher $teacher){
+         
+        $teacher->delete();
+        return redirect()->route('teachers.index');
+    }
 }
